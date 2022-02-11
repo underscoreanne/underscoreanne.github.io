@@ -1,3 +1,5 @@
+// TODO check words for validity
+
 let cells = [];
 let buffer = "";
 let row = 0;
@@ -19,6 +21,7 @@ function bufferDel() {
 
 function bufferCheck() {
     if (buffer.length != 5) return;
+    if (words.indexOf(buffer) < 0) return;
 
     let nCorrect = 0;
 
