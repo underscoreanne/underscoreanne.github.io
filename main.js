@@ -13,29 +13,48 @@ function bufferAdd(k) {
 }
 
 function bufferDel() {
+    if (buffer.length == 0) return
     cells[row][buffer.length - 1].innerText = '.';
-    if (buffer.length > 0) buffer = buffer.slice(0, buffer.length - 1); 
+    if (buffer.length > 0) buffer = buffer.slice(0, buffer.length - 1);
+}
+
+function setChar(s, i, c) {
+    return s.slice(0, i) + c + s.slice(i+1, s.length);
 }
 
 function bufferCheck() {
     if (buffer.length != 5) return;
     if (words.indexOf(buffer) < 0) return;
+    if (buffer == todaysWord) win();
 
-    let nCorrect = 0;
+    let nOccurences = {};
+    for (const ch of todaysWord) {
+        if (nOccurences.hasOwnProperty(ch))
+            nOccurences[ch]++;
+        else nOccurences[ch] = 1;
+    }
 
     for (let i = 0; i < 5; i++) {
-        if (todaysWord[i] == buffer[i]) {
-            cells[row][i].style.backgroundColor = "lightgreen";
-            nCorrect++;
-        } else if (todaysWord.indexOf(buffer[i]) > -1) {
-            cells[row][i].style.backgroundColor = "khaki";
-        } else cells[row][i].style.backgroundColor = "grey";
+        cells[row][i].style.backgroundColor = 'grey';
+        if (buffer[i] == todaysWord[i]) {
+            nOccurences[buffer[i]]--;
+            buffer = setChar(buffer, i, ' ');
+            cells[row][i].style.backgroundColor = 'lightgreen';
+        }
+    }
+
+    for (const key of Object.keys(nOccurences)) {
+        for (; nOccurences[key] > 0; nOccurences[key]--) {
+            if (buffer.indexOf(key) >= 0) {
+                cells[row][buffer.indexOf(key)].style.backgroundColor = 'khaki';
+                buffer = setChar(buffer, buffer.indexOf(key), ' ');
+            }
+        }
     }
 
     row++;
-    buffer = "";
+    buffer = ""
     if (row > 5) lose();
-    if (nCorrect == 5) win();
 }
 
 function lose() {
@@ -45,6 +64,8 @@ function lose() {
 
 function win() {
     title.innerText = todaysWord;
+    for (let i = 0; i < 5; i++)
+        cells[row][i].style.backgroundColor = 'lightgreen';
     window.onkeydown = () => {};
 }
 
