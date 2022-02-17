@@ -1,5 +1,3 @@
-// TODO check words for validity
-
 let cells = [];
 let buffer = "";
 let row = 0;
