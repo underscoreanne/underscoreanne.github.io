@@ -25,7 +25,10 @@ function setChar(s, i, c) {
 function bufferCheck() {
     if (buffer.length != 5) return;
     if (words.indexOf(buffer) < 0) return;
-    if (buffer == todaysWord) win();
+    if (buffer == todaysWord) {
+        win();
+        return;
+    }
 
     let nOccurences = {};
     for (const ch of todaysWord) {
