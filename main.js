@@ -61,12 +61,12 @@ function bufferCheck() {
 }
 
 function lose() {
-    title.innerText = "Better luck next time!";
+    title.innerText = todaysWord;
     window.onkeydown = () => {};
 }
 
 function win() {
-    title.innerText = todaysWord;
+    title.innerText = "Excellent!";
     for (let i = 0; i < 5; i++)
         cells[row][i].style.backgroundColor = 'lightgreen';
     window.onkeydown = () => {};
