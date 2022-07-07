@@ -1,0 +1,29 @@
+body {
+	font-family: iosevka, monospace, sans-serif;
+	max-width: 600px;
+	margin: auto;
+}
+h1, h2 {
+	text-align: center;
+}
+code {
+	font-family: iosevka, monospace;
+	background-color: lightgrey;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+.cap {
+	text-align: center;
+	font-style: italic;
+}
+.signoff {
+	text-align: right;
+	font-style: italic;
+}
+a {
+	color: blue;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
